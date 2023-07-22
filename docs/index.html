@@ -19,69 +19,13 @@
 (() => {
     // src/youtube/youtube.ts
     var params = new URLSearchParams(document.location.search);
-
-    setTimeout(() => {
-        document.body.insertAdjacentHTML('beforeend', `<div itemprop="playerContainer">
-		<div itemprop="player"></div>
-	</div>`);
-        const container = document.querySelector('[itemprop="playerContainer"]');
-        const el = document.querySelector('[itemprop="player"]');
-        container.style.background = 'red';
-        const youtube = new YT.Player(el, {
-            height: "100%",
-            width: "100%",
-            videoId: "B2h6jAHe3Dk",
-            playerVars: {
-                autoplay: 1
-            },
-            events: {
-                onReady: () => {
-                    container.style.opacity = "1";
-                    youtube.playVideo();
-                },
-                onStateChange(event) {
-                    if (event.data !== YT.PlayerState.ENDED) {
-                        return;
-                    }
-                    container.style.opacity = "0";
-                }
-            }
-        });
-    }, 6000);
-
-
-    setTimeout(() => {
-        const container = document.querySelector('[itemprop="playerContainer"]');
-        const el = document.querySelector('[itemprop="player"]');
-        container.style.background = 'red';
-        const youtube = new YT.Player(el, {
-            height: "100%",
-            width: "100%",
-            videoId: "B2h6jAHe3Dk",
-            playerVars: {
-                autoplay: 1
-            },
-            events: {
-                onReady: () => {
-                    container.style.opacity = "1";
-                    youtube.playVideo();
-                },
-                onStateChange(event) {
-                    if (event.data !== YT.PlayerState.ENDED) {
-                        return;
-                    }
-                    container.style.opacity = "0";
-                }
-            }
-        });
-    }, 2000);
-    const onYouTubeIframeAPIReady = () => {
+    window.onYouTubeIframeAPIReady = () => {
         const container = document.querySelector('[itemprop="playerContainer"]');
         const el = document.querySelector('[itemprop="player"]');
         const youtube = new YT.Player(el, {
             height: "100%",
             width: "100%",
-            videoId: "B2h6jAHe3Dk",
+            videoId: params.get("id") ?? "",
             playerVars: {
                 autoplay: 1
             },
@@ -99,7 +43,6 @@
             }
         });
     };
-    setTimeout(onYouTubeIframeAPIReady, 2000)
     var tag = document.createElement("script");
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName("script")[0];
