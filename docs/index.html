@@ -5,9 +5,14 @@
     body {
         margin: 0;
     }
-    [itemprop=playerContainer] {
+    [itemprop="playerContainer"] {
         transition: opacity 350ms ease-in;
         opacity: 0;
+        margin: 20px 0 20px 20px;
+    }
+    [itemprop="player"] {
+        border-radius: 30px 0 0 30px;
+        box-shadow: 0 0 20px 0 #000;
     }
     </style>
 </head>
@@ -26,6 +31,7 @@
             height: "100%",
             width: "100%",
             videoId: params.get("id") ?? "",
+
             playerVars: {
                 autoplay: 1
             },
